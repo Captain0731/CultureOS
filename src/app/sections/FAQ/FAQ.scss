@@ -1,0 +1,484 @@
+@use '../../../styles/variables' as *;
+
+// ─── Section Container ───
+.faqSection {
+  padding: 8rem 0;
+  position: relative;
+  z-index: 1;
+  background: $color-bg;
+  overflow: hidden; // Prevent 3D translate offset leaks from creating page scrollbars
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 5rem 0;
+  }
+}
+
+// ─── Header ───
+.faqHeader {
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  text-align: center;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.faqTitle {
+  font-family: $font-heading;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: $color-fg;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.25rem;
+  }
+}
+
+.faqSubtitle {
+  font-size: 1.1rem;
+  color: $color-fg-muted;
+  line-height: 1.5;
+}
+
+// ─── 3D Perspective Card Stage ───
+.faqDeckContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.faqDeck3DStage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 620px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  overflow: visible;
+
+  @media (max-width: $breakpoint-desktop) {
+    height: 560px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    height: 510px;
+  }
+}
+
+// Individual 3D Deck Card
+.faqDeckCard {
+  position: absolute;
+  width: 530px;
+  height: 570px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 32px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.025);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  &.faqCardActive {
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &.faqCardInactive {
+    cursor: pointer;
+  }
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 440px;
+    height: 520px;
+    padding: 2rem 2.25rem;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 300px;
+    height: 460px;
+    padding: 1.5rem;
+    border-radius: 24px;
+  }
+}
+
+// Ambient backing glows within the card
+.faqCardGlow {
+  position: absolute;
+  top: -15%;
+  right: -15%;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+
+  &.bg-purple { background: $color-purple; }
+  &.bg-orange { background: $color-orange; }
+  &.bg-blue { background: $color-blue; }
+  &.bg-green { background: $color-green; }
+  &.bg-pink { background: #ec4899; }
+}
+
+// Content Layout inside cards
+.faqCardContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.faqCardHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.faqCardNum {
+  font-family: $font-heading;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $color-fg-light;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 0.95rem;
+  }
+}
+
+.faqCardBadge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+
+  &.theme-purple { color: $color-purple; background: rgba($color-purple, 0.06); }
+  &.theme-orange { color: $color-orange; background: rgba($color-orange, 0.06); }
+  &.theme-blue { color: $color-blue; background: rgba($color-blue, 0.06); }
+  &.theme-green { color: $color-green; background: rgba($color-green, 0.06); }
+  &.theme-pink { color: #ec4899; background: rgba(#ec4899, 0.06); }
+}
+
+.faqCardBody {
+  flex: 1;
+}
+
+.faqCardTitle {
+  font-family: $font-heading;
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: $color-fg;
+  margin-bottom: 0.75rem;
+
+  @media (max-width: $breakpoint-desktop) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.faqCardDesc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: $color-fg-muted;
+  margin-bottom: 1.25rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.faqCardBullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    gap: 0.4rem;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: $color-fg-muted;
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 0.8rem;
+    }
+
+    .bulletIcon {
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+      flex-shrink: 0;
+
+      &.text-purple { color: $color-purple; }
+      &.text-orange { color: $color-orange; }
+      &.text-blue { color: $color-blue; }
+      &.text-green { color: $color-green; }
+      &.text-pink { color: #ec4899; }
+    }
+  }
+}
+
+// Graphic Image Column (Centered Bubble in card)
+.faqCardGraphicRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 1rem;
+  }
+}
+
+// Image wrappers
+.faqImageWrapper {
+  position: relative;
+  width: 170px;
+  height: 170px;
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 140px;
+    height: 140px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.faqImageCircle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition-smooth;
+
+  &.bg-purple {
+    background: $color-pastel-purple;
+    border: 1px solid rgba($color-purple, 0.1);
+    box-shadow: 0 15px 30px rgba($color-purple, 0.06);
+  }
+  &.bg-orange {
+    background: $color-pastel-orange;
+    border: 1px solid rgba($color-orange, 0.1);
+    box-shadow: 0 15px 30px rgba($color-orange, 0.06);
+  }
+  &.bg-blue {
+    background: $color-pastel-blue;
+    border: 1px solid rgba($color-blue, 0.1);
+    box-shadow: 0 15px 30px rgba($color-blue, 0.06);
+  }
+  &.bg-green {
+    background: $color-pastel-green;
+    border: 1px solid rgba($color-green, 0.1);
+    box-shadow: 0 15px 30px rgba($color-green, 0.06);
+  }
+  &.bg-pink {
+    background: $color-pastel-pink;
+    border: 1px solid rgba($color-purple, 0.1);
+    box-shadow: 0 15px 30px rgba($color-purple, 0.06);
+  }
+}
+
+.faqPersonImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  padding: 1rem;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .bg-orange & {
+    object-fit: cover;
+    padding: 0;
+  }
+}
+
+.faqCardActive:hover {
+  .faqPersonImage {
+    transform: scale(1.05);
+  }
+}
+
+// 24/5 style support badge
+.faqSupportBadge {
+  position: absolute;
+  bottom: 4px;
+  right: -10px;
+  width: 64px;
+  height: 64px;
+  background: $color-bg;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  z-index: 2;
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 56px;
+    height: 56px;
+    right: -8px;
+    bottom: 2px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 48px;
+    height: 48px;
+    right: -6px;
+    bottom: 0px;
+  }
+
+  .badgeNumber {
+    font-family: $font-heading;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: $color-fg;
+    line-height: 1;
+    letter-spacing: -0.02em;
+
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 0.8rem;
+    }
+  }
+
+  .badgeLabel {
+    font-size: 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: $color-fg-muted;
+    text-transform: uppercase;
+    margin-top: 2px;
+
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 0.4rem;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 0.35rem;
+    }
+  }
+}
+
+// ─── Controls (Arrows & Pagination Dots) ───
+.faqDeckControls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3.5rem;
+  z-index: 5;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 2.5rem;
+    gap: 1.25rem;
+  }
+}
+
+.deckNavBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-fg-muted;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+
+  &:hover {
+    color: $color-fg;
+    border-color: rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.01);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.deckPaginationDots {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.deckDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.12);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &.deckDotActive {
+    background: $color-fg;
+    width: 24px; // Expand active dot horizontally into a pill
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,168 @@
+@import '../../../styles/variables';
+
+.teamSection {
+  padding: 120px 0;
+  background-color: $color-bg;
+  overflow: hidden;
+
+  .container {
+    max-width: $breakpoint-widescreen;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .teamHeader {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px auto;
+
+    h2 {
+      font-family: $font-heading;
+      font-size: 3rem;
+      line-height: 1.25;
+      color: $color-fg;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      
+      .italicHighlight {
+        font-style: italic;
+        position: relative;
+        display: inline-block;
+        color: $color-purple;
+        font-weight: 500;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: $color-purple;
+          border-radius: 2px;
+          transform: rotate(-1deg);
+          transform-origin: left;
+        }
+      }
+    }
+  }
+
+  .teamGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .teamCard {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    &:hover {
+      .cardImage img {
+        transform: scale(1.03);
+      }
+      .cardContent::before {
+        background-color: $color-purple;
+      }
+      .cardContent .link {
+        color: $color-purple;
+        text-decoration-color: $color-purple;
+      }
+    }
+  }
+
+  .cardImage {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background-color: $color-pastel-purple; // placeholder color before image loads
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%; // Focus more on the face for these specific images
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center;
+    }
+  }
+
+  .cardContent {
+    position: relative;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 1.5px;
+      background-color: $color-fg;
+      transform-origin: top;
+      transition: all 0.3s ease;
+    }
+
+    .role {
+      font-size: 0.85rem;
+      color: $color-fg-muted;
+      margin-bottom: 12px;
+      font-weight: 500;
+      font-family: $font-sans;
+    }
+
+    .name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $color-fg;
+      margin-bottom: 8px;
+      font-family: $font-heading;
+      letter-spacing: -0.01em;
+    }
+
+    .desc {
+      font-size: 0.95rem;
+      color: $color-fg-muted;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+      font-family: $font-sans;
+    }
+
+    .link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $color-fg;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: all 0.3s ease;
+      width: fit-content;
+      font-family: $font-sans;
+    }
+  }
+
+  // Responsive typography
+  @media (max-width: $breakpoint-tablet) {
+    padding: 80px 0;
+
+    .teamHeader {
+      margin-bottom: 40px;
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  }
+}

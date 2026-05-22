@@ -1,0 +1,812 @@
+@use '../../../styles/variables' as *;
+
+.engagementSection {
+  padding: 10rem 0;
+  position: relative;
+  z-index: 1;
+  background: #fafafa; // Light gray backdrop
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 6rem 0;
+  }
+}
+
+.engagementHeader {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 5.5rem auto;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 4rem;
+  }
+}
+
+.engagementTitle {
+  font-family: $font-heading;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: $color-fg;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.25rem;
+  }
+}
+
+.highlightEngaged {
+  position: relative;
+  font-style: italic;
+  font-family: inherit;
+  display: inline-block;
+}
+
+.underlineSVG {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 9px;
+  pointer-events: none;
+}
+
+.engagementSubtitle {
+  font-size: 1.2rem;
+  color: $color-fg-muted;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1rem;
+  }
+}
+
+// Console Layout (2-column split)
+.driversConsoleLayout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-desktop) {
+    gap: 3rem;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    gap: 4rem;
+  }
+}
+
+// --- LEFT COLUMN: ROTATING DIAL CONSOLE ---
+.dialConsoleWrapper {
+  width: 380px;
+  height: 380px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+// Futuristic radar/compass lines in background
+.dialBackgroundGrid {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  z-index: 0;
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 270px;
+    height: 270px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.04) 15%, rgba(0,0,0,0.04) 85%, transparent);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.04) 15%, rgba(0,0,0,0.04) 85%, transparent);
+  }
+}
+
+// Spinning Ring Wheel
+.dialOuterRing {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(0, 0, 0, 0.06);
+  z-index: 1;
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 210px;
+    height: 210px;
+  }
+}
+
+// Interactive Dial Pads
+.orbitalPad {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  z-index: 3;
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1),
+              background 0.4s ease,
+              color 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 58px;
+    height: 58px;
+  }
+
+  .padNum {
+    font-size: 0.65rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+    opacity: 0.6;
+  }
+
+  .padIcon {
+    opacity: 0.75;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+    .padIcon {
+      transform: scale(1.1);
+    }
+  }
+
+  // Active configurations
+  &.active {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+
+    .padNum {
+      opacity: 1;
+    }
+  }
+
+  &.padPurple {
+    color: #a855f7;
+    &.active {
+      background: #a855f7;
+      border-color: #a855f7;
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(168, 85, 247, 0.25);
+    }
+  }
+
+  &.padGreen {
+    color: #22c55e;
+    &.active {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(34, 197, 94, 0.25);
+    }
+  }
+
+  &.padOrange {
+    color: #f97316;
+    &.active {
+      background: #f97316;
+      border-color: #f97316;
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(249, 115, 22, 0.25);
+    }
+  }
+
+  &.padBlue {
+    color: #3b82f6;
+    &.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.25);
+    }
+  }
+}
+
+// Pulse core central circle
+.dialCentralCore {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: #111111;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease;
+
+  @media (max-width: $breakpoint-desktop) {
+    width: 80px;
+    height: 80px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    background: #000000;
+  }
+
+  &.paused {
+    .pulseCoreCircle {
+      animation-play-state: paused;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .playPauseBtn {
+      color: #a855f7; // Glow active when paused
+    }
+  }
+
+  .coreContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .coreLogoText {
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .playPauseBtn {
+    margin-top: 5px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+
+    svg {
+      display: block;
+    }
+
+    .playIcon {
+      margin-left: 1px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+  }
+}
+
+.pulseCoreCircle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: corePulseAnimation 2s infinite ease-out;
+  z-index: 1;
+}
+
+@keyframes corePulseAnimation {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+
+// --- RIGHT COLUMN: LIGHT GLASS TERMINAL DISPLAY SCREEN ---
+.terminalDisplayScreen {
+  flex: 1;
+  height: 400px;
+  background: #ffffff; // Soft light background
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 36px;
+  padding: 3.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: $breakpoint-desktop) {
+    height: 380px;
+    padding: 2.5rem;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 100%;
+    height: auto;
+    min-height: 380px;
+  }
+
+  // Subtle interior glow matching card
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: background 0.8s ease;
+  }
+
+  &.themePurple::after { background: radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.04), transparent 60%); }
+  &.themeGreen::after { background: radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.04), transparent 60%); }
+  &.themeOrange::after { background: radial-gradient(circle at 80% 20%, rgba(249, 115, 22, 0.04), transparent 60%); }
+  &.themeBlue::after { background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.04), transparent 60%); }
+}
+
+// Subtle screen scanlines overlay (made lighter for white screen)
+.screenScanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 50%, 
+    rgba(0, 0, 0, 0.01) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+}
+
+// Corner bracket indicators
+.screenCorner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  pointer-events: none;
+  z-index: 3;
+  transition: border-color 0.8s ease;
+
+  .themePurple & { border-color: rgba(168, 85, 247, 0.4); }
+  .themeGreen & { border-color: rgba(34, 197, 94, 0.4); }
+  .themeOrange & { border-color: rgba(249, 115, 22, 0.4); }
+  .themeBlue & { border-color: rgba(59, 130, 246, 0.4); }
+
+  &.cornerTL { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+  &.cornerTR { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+  &.cornerBL { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+  &.cornerBR { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+}
+
+// Header info on screen
+.screenHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+  z-index: 3;
+
+  .systemStatusPill {
+    font-family: monospace;
+    transition: color 0.5s ease;
+
+    .themePurple & { color: #a855f7; }
+    .themeGreen & { color: #22c55e; }
+    .themeOrange & { color: #f97316; }
+    .themeBlue & { color: #3b82f6; }
+  }
+
+  .liveIndicator {
+    color: $color-fg-muted;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+  }
+
+  .liveDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: liveBlink 1s infinite alternate;
+  }
+}
+
+@keyframes liveBlink { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+
+// 2-column layout inside the screen
+.screenMainGrid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+  flex: 1;
+  z-index: 3;
+
+  @media (max-width: $breakpoint-desktop) {
+    gap: 2rem;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+}
+
+// Text column inside terminal
+.screenTextCol {
+  flex: 1.1;
+
+  .systemBadge {
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+    transition: color 0.5s ease;
+
+    .themePurple & { color: #a855f7; }
+    .themeGreen & { color: #22c55e; }
+    .themeOrange & { color: #f97316; }
+    .themeBlue & { color: #3b82f6; }
+  }
+
+  .systemTitle {
+    font-family: $font-heading;
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: $color-fg;
+    margin-bottom: 1rem;
+
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .systemDescription {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: $color-fg-muted;
+
+    @media (max-width: $breakpoint-desktop) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Live Widget column inside terminal
+.screenWidgetCol {
+  flex: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.terminalWidget {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.015);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.01);
+}
+
+// Widget 0: Poll
+.pollWidget {
+  .pollHeader {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: $color-fg;
+    margin-bottom: 1.25rem;
+  }
+
+  .pollOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .pollOptionRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .optionLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $color-fg;
+  }
+
+  .percentText {
+    color: #a855f7;
+  }
+
+  .optionBarOuter {
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .optionBarInner {
+    height: 100%;
+    border-radius: 10px;
+    animation: barFill 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .optThrive .optionBarInner { background: #a855f7; }
+  .optSteady .optionBarInner { background: #c084fc; }
+  .optTired .optionBarInner { background: #e9d5ff; }
+}
+
+@keyframes barFill {
+  0% { width: 0%; }
+}
+
+// Widget 1: Progress Sync
+.progressWidget {
+  .taskSummary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: $color-fg;
+  }
+
+  .statusPill {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border-radius: 10px;
+  }
+
+  .taskDetailsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .tasksList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .taskItem {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $color-fg;
+
+    .checkbox {
+      width: 15px;
+      height: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: bold;
+    }
+
+    &.done {
+      color: $color-fg-muted;
+      text-decoration: line-through;
+      .checkbox {
+        background: #22c55e;
+        border-color: #22c55e;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .progressCircleWrapper {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circleProgress {
+    animation: progressFill 1.2s ease-out forwards;
+  }
+
+  .percentageLabel {
+    position: absolute;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #22c55e;
+  }
+}
+
+@keyframes progressFill {
+  0% { stroke-dasharray: 0, 100; }
+}
+
+// Widget 2: Attrition Radar
+.attritionWidget {
+  .radarHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: $color-fg;
+    margin-bottom: 0.5rem;
+  }
+
+  .riskPill {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border-radius: 10px;
+  }
+
+  .radarScannerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    height: 100px;
+  }
+
+  .radarGrid {
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 1px dashed rgba(249, 115, 22, 0.2);
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border-radius: 50%;
+      border: 1px dashed rgba(249, 115, 22, 0.1);
+    }
+  }
+
+  .scannerLine {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 1.5px;
+    background: linear-gradient(90deg, #f97316, transparent);
+    transform-origin: left center;
+    animation: radarScan 2.5s linear infinite;
+  }
+
+  .riskMarker {
+    position: absolute;
+    top: 22px;
+    left: 42px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f97316;
+    animation: beaconGlow 1s infinite alternate;
+  }
+
+  .needleGauge {
+    width: 110px;
+    margin-left: auto;
+  }
+
+  .gaugeNeedle {
+    transform-origin: 50px 50px;
+    animation: needleSweep 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+}
+
+@keyframes needleSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(80deg); }
+}
+
+// Widget 3: Network Matrix
+.networkWidget {
+  .networkMap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .networkSVG {
+    width: 100%;
+    height: 100%;
+  }
+
+  .link1, .link2, .link3 {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: linkDraw 1s ease-out forwards;
+  }
+
+  .outerNode {
+    transform-origin: center;
+    animation: nodeEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .nodeGroup1 { animation-delay: 0.15s; }
+  .nodeGroup2 { animation-delay: 0.3s; }
+  .nodeGroup3 { animation-delay: 0.45s; }
+}
+
+@keyframes linkDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes nodeEnter {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}

@@ -1,0 +1,170 @@
+@use '../styles/variables' as *;
+
+.mcCard {
+  width: 220px;
+  height: 145px;
+  background: #fcfcfd;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: $font-sans;
+  user-select: none;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.mcHeader {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  padding-bottom: 6px;
+}
+
+.mcTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #333333;
+  letter-spacing: -0.01em;
+}
+
+.mcBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  flex: 1;
+}
+
+// Task Card styles
+.mcTaskRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mcCheckbox {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: $transition-fast;
+  
+  &.mcChecked {
+    background: #10b981;
+    border-color: #10b981;
+  }
+}
+
+.mcTaskText {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #4b5563;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Board Card styles
+.mcBoardBody {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.mcBoardCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mcColTitle {
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.mcBoardItem {
+  font-size: 0.55rem;
+  font-weight: 550;
+  padding: 4px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  &.mcPurpleBg {
+    background: #f3ebfc;
+    color: #8b5cf6;
+  }
+  &.mcBlueBg {
+    background: #e6f0ff;
+    color: #3b82f6;
+  }
+  &.mcOrangeBg {
+    background: #fff2e6;
+    color: #f97316;
+  }
+}
+
+// Progress Card styles
+.mcProgressBody {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.mcMetrics {
+  display: flex;
+  flex-direction: column;
+}
+
+.mcMetricVal {
+  font-family: $font-heading;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+}
+
+.mcMetricSub {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.mcChart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 48px;
+}
+
+.mcBar {
+  width: 6px;
+  background: #111827;
+  border-radius: 2px 2px 0 0;
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  &:last-child {
+    background: #8b5cf6;
+    opacity: 1;
+  }
+}

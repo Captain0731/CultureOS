@@ -1,0 +1,83 @@
+@use '../styles/variables' as *;
+
+.calCard {
+  width: 220px;
+  height: 145px;
+  background: #fcfcfd;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: $font-sans;
+  user-select: none;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.calHeader {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  padding-bottom: 6px;
+}
+
+.calTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #333333;
+  letter-spacing: -0.01em;
+}
+
+.calBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.calRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calDay {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #888888;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.calTasks {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.calTask {
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  display: inline-block;
+  
+  &.calPurple {
+    background: #e8dff5;
+    color: #6d28d9;
+  }
+  
+  &.calGreen {
+    background: #e2f4e8;
+    color: #15803d;
+  }
+  
+  &.calOrange {
+    background: #fdf2e9;
+    color: #c2410c;
+  }
+}
