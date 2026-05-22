@@ -47,7 +47,7 @@ export default function NotFound() {
           className="badge"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
           style={{ 
             borderColor: 'rgba(239, 68, 68, 0.15)', 
             background: 'rgba(239, 68, 68, 0.04)',
@@ -63,7 +63,7 @@ export default function NotFound() {
           className="timelineTitle"
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 }}
           style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.03em' }}
         >
           Lost in the <span style={{ color: '#8b5cf6' }}>core</span>
@@ -74,7 +74,7 @@ export default function NotFound() {
           className="subtitle"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }}
           style={{ textAlign: 'center', marginBottom: '2.5rem' }}
         >
           The page or workspace path you requested does not exist on this shard. It might have been moved, renamed, or is temporarily offline.
@@ -85,7 +85,7 @@ export default function NotFound() {
           className="commandConsole"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.3 }}
           style={{ 
             width: '100%', 
             maxWidth: '460px', 
@@ -125,7 +125,7 @@ export default function NotFound() {
           className="ctaGroup"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.4 }}
           style={{ gap: '1rem', width: '100%', justifyContent: 'center' }}
         >
           <Link href="/" className="primaryCta" style={{ padding: '0.9rem 2rem', fontSize: '0.95rem' }}>

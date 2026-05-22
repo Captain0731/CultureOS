@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../styles/variables' as *;
 
 .navbarHeader {
@@ -463,7 +464,7 @@
 
 .scienceFooterText { color: $color-fg; font-size: 0.95rem; }
 
-.scienceFooterCta { background: linear-gradient(90deg, $color-purple 0%, darken($color-purple, 10%) 100%); color: #fff; padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 700; }
+.scienceFooterCta { background: linear-gradient(90deg, $color-purple 0%, color.adjust($color-purple, $lightness: -10%) 100%); color: #fff; padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 700; }
 
 /* New stacked item layout */
 .scienceColumnsWrapper {

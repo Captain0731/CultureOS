@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@use '../../../styles/variables' as *;
 
 .footerSection {
   background-color: #0b0c10; // Darker, sleeker background

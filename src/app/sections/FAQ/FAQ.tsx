@@ -270,7 +270,7 @@ export default function FAQ() {
                   animate={animateStyle}
                   transition={{
                     duration: 0.7,
-                    ease: [0.16, 1, 0.3, 1], // Custom premium easeOutExpo
+                    ease: [0.16, 1, 0.3, 1] as const, // Custom premium easeOutExpo
                   }}
                   drag={isActive ? 'x' : false}
                   dragConstraints={{ left: 0, right: 0 }}

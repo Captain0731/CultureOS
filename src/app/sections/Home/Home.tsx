@@ -67,7 +67,7 @@ export default function HomeSection() {
               className="badge"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 }}
             >
               <span className="badgePulse" />
               <span>Culture OS 2.0 is now live</span>
@@ -79,7 +79,7 @@ export default function HomeSection() {
                 className="headlineLine"
                 initial={{ opacity: 0, y: 35 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }}
               >
                 Take Control Of Your
               </motion.span>
@@ -88,7 +88,7 @@ export default function HomeSection() {
                 className="headlineRow"
                 initial={{ opacity: 0, y: 35 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.3 }}
               >
                 <span className="boldText">Tasks</span>
                 
@@ -140,7 +140,7 @@ export default function HomeSection() {
               className="subtitle"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.4 }}
             >
               A minimal futuristic workspace designed for high-performance teams. 
               Consolidate tasks, docs, and sprints into one unified, elegant, and ultra-fast interface.
@@ -151,7 +151,7 @@ export default function HomeSection() {
               className="ctaGroup"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.5 }}
             >
               <a href="#get-started" className="primaryCta">
                 Get Started Free

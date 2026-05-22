@@ -58,7 +58,7 @@ export default function Error({
           className="badge"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
           style={{ 
             borderColor: 'rgba(249, 115, 22, 0.15)', 
             background: 'rgba(249, 115, 22, 0.04)',
@@ -74,7 +74,7 @@ export default function Error({
           className="timelineTitle"
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 }}
           style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-0.03em' }}
         >
           A glitch in the <span style={{ color: '#f97316' }}>workspace</span>
@@ -85,7 +85,7 @@ export default function Error({
           className="subtitle"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }}
           style={{ textAlign: 'center', marginBottom: '2.5rem' }}
         >
           An unexpected error occurred while rendering this view. The system has automatically isolated the boundary to prevent data loss.
@@ -96,7 +96,7 @@ export default function Error({
           className="commandConsole"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.3 }}
           style={{ 
             width: '100%', 
             maxWidth: '460px', 
@@ -135,7 +135,7 @@ export default function Error({
           className="ctaGroup"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.4 }}
           style={{ gap: '1rem', width: '100%', justifyContent: 'center' }}
         >
           <button 
