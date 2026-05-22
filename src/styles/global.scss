@@ -1,0 +1,295 @@
+﻿@use '@/styles/variables' as *;
+
+:root {
+  --color-bg: #{$color-bg};
+  --color-fg: #{$color-fg};
+  --color-fg-muted: #{$color-fg-muted};
+  --color-fg-light: #{$color-fg-light};
+  --color-border: #{$color-border};
+  --color-border-light: #{$color-border-light};
+  
+  --color-pastel-purple: #{$color-pastel-purple};
+  --color-pastel-green: #{$color-pastel-green};
+  --color-pastel-orange: #{$color-pastel-orange};
+  --color-pastel-blue: #{$color-pastel-blue};
+  --color-pastel-pink: #{$color-pastel-pink};
+
+  --color-purple: #{$color-purple};
+  --color-green: #{$color-green};
+  --color-orange: #{$color-orange};
+  --color-blue: #{$color-blue};
+
+  --font-sans: #{$font-sans};
+  --font-heading: #{$font-heading};
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  
+  @media (max-width: 768px) {
+    padding: 0 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dcdcdc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c0c0c0;
+}
+.gridBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1000px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 30%, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.badgePulse {
+  width: 6px;
+  height: 6px;
+  background: $color-green;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px solid $color-green;
+    border-radius: 50%;
+    animation: badgePulse 2s infinite ease-out;
+  }
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: $color-fg-muted;
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  letter-spacing: -0.01em;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+// CTA Group
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 1rem;
+  }
+}
+
+.primaryCta {
+  background: $color-fg;
+  color: $color-bg;
+  padding: 1.1rem 2.2rem;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: $transition-smooth;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
+    background: #181818;
+  }
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.01);
+  color: $color-fg;
+  padding: 1.1rem 2.2rem;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: $transition-smooth;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+
+    .playIcon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.playIcon {
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-fg;
+  transition: $transition-smooth;
+
+  svg {
+    margin-left: 2px;
+  }
+}
+.commandConsole {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 460px;
+  overflow: hidden;
+}
+
+.consoleHeader {
+  height: 44px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background: #fafafb;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $color-fg-light;
+}
+
+.consoleDots {
+  display: flex;
+  gap: 4px;
+}
+
+.consoleDot {
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+}
+
+.timelineTitle {
+  font-family: $font-heading;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: $color-fg;
+  margin-bottom: 1.25rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.2rem;
+  }
+}

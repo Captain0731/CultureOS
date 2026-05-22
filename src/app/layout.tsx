@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
-import "./sections/Home/Home.scss";
-import SmoothScroll from "../components/SmoothScroll";
-import Navbar from "../components/Navbar";
+import "@/styles/global.scss";
+import "./globals.css";
+import SmoothScroll from "@/components/layout/SmoothScroll/SmoothScroll";
+import Navbar from "@/components/layout/Navbar/Navbar";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -18,11 +19,13 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Culture OS — Take Control Of Your Tasks",
-  description: "A modern workspace designed for teams who value speed, beauty, and precision. Built on Next.js, powered by GSAP, and styled for the future.",
+  description:
+    "A modern workspace designed for teams who value speed, beauty, and precision. Built on Next.js, powered by GSAP, and styled for the future.",
   metadataBase: new URL("https://cultureos.io"),
   openGraph: {
     title: "Culture OS — Take Control Of Your Tasks",
-    description: "A modern workspace designed for teams who value speed, beauty, and precision.",
+    description:
+      "A modern workspace designed for teams who value speed, beauty, and precision.",
     type: "website",
     locale: "en_US",
   },
@@ -41,11 +44,8 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <Navbar />
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
 }
-

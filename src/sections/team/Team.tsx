@@ -9,7 +9,7 @@ const teamMembers = [
     description: 'Renowned psychotherapist and New York Times bestselling author',
     linkText: 'Explore the partnership',
     linkUrl: '#',
-    image: '/insight_person_1.png',
+    image: '/images/insight_person_1.png',
   },
   {
     role: 'Culture First Podcast',
@@ -17,7 +17,7 @@ const teamMembers = [
     description: 'Renowned author, marketer, and entrepreneur',
     linkText: 'Listen to the podcast now',
     linkUrl: '#',
-    image: '/insight_person_2.png',
+    image: '/images/insight_person_2.png',
   },
   {
     role: 'Culture First Virtual',
@@ -25,7 +25,7 @@ const teamMembers = [
     description: "FIFA Women's World Cup champion and olympic gold medalist",
     linkText: 'Watch the video now',
     linkUrl: '#',
-    image: '/support-person.png',
+    image: '/images/support-person.png',
   }
 ];
 
@@ -62,10 +62,9 @@ export default function Team() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
           >
-            Learn from some of the most <span className="italicHighlight">innovative</span>
-            <br />
-            people leaders to build a better world<br />
-            of work
+            Learn from some of the most{' '}
+            <span className="italicHighlight">innovative</span> people leaders to build a better
+            world of work
           </motion.h2>
         </div>
 

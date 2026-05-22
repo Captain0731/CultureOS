@@ -1,143 +1,36 @@
-@use '../../../styles/variables' as *;
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
-:root {
-  --color-bg: #{$color-bg};
-  --color-fg: #{$color-fg};
-  --color-fg-muted: #{$color-fg-muted};
-  --color-fg-light: #{$color-fg-light};
-  --color-border: #{$color-border};
-  --color-border-light: #{$color-border-light};
-  
-  --color-pastel-purple: #{$color-pastel-purple};
-  --color-pastel-green: #{$color-pastel-green};
-  --color-pastel-orange: #{$color-pastel-orange};
-  --color-pastel-blue: #{$color-pastel-blue};
-  --color-pastel-pink: #{$color-pastel-pink};
-
-  --color-purple: #{$color-purple};
-  --color-green: #{$color-green};
-  --color-orange: #{$color-orange};
-  --color-blue: #{$color-blue};
-
-  --font-sans: #{$font-sans};
-  --font-heading: #{$font-heading};
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: auto;
-}
-
-body {
-  position: relative;
-  min-height: 100vh;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  background: none;
-  border: none;
-  outline: none;
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2.5rem;
-  
-  @media (max-width: 768px) {
-    padding: 0 1.5rem;
-  }
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-fg);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 2rem;
-  font-family: var(--font-heading);
-}
-
-// Custom scrollbar
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #dcdcdc;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #c0c0c0;
-}
-
+@use '@/styles/variables' as *;
 .homeContainer {
   position: relative;
   background-color: $color-bg;
   color: $color-fg;
   width: 100%;
   overflow-x: hidden;
-  padding-top: 80px; // For the fixed header
+  padding-top: 80px;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding-top: 88px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding-top: 76px;
+  }
 }
 
 // Linear/Framer Dot Grid Background
-.gridBg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1000px;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(circle at 50% 30%, black 60%, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 60%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
-}
 
 // Hero Section
 .heroSection {
   position: relative;
-  padding: 2rem 0 5rem 0;
+  padding: 2rem 0 5rem;
   z-index: 1;
   overflow: hidden;
 
   @media (max-width: $breakpoint-tablet) {
-    padding: 4rem 0 3rem 0;
+    padding: 1.5rem 0 3rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem 0 2.5rem;
   }
 }
 
@@ -146,9 +39,59 @@ button {
   flex-direction: column;
   align-items: center;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   position: relative;
+
+  .badge {
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.65rem;
+      padding: 0.4rem 0.75rem;
+      margin-bottom: 1.25rem;
+      max-width: calc(100% - 1rem);
+      text-align: center;
+      line-height: 1.3;
+    }
+  }
+
+  .subtitle {
+    @media (max-width: $breakpoint-tablet) {
+      max-width: 100%;
+      padding: 0 0.25rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .ctaGroup {
+    @media (max-width: $breakpoint-tablet) {
+      width: 100%;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      max-width: 100%;
+      padding: 0 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .primaryCta,
+    .secondaryCta {
+      @media (max-width: $breakpoint-mobile) {
+        padding: 0.95rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .heroVisualRight {
@@ -263,42 +206,11 @@ button {
   }
 }
 
-.badgePulse {
-  width: 6px;
-  height: 6px;
-  background: $color-green;
-  border-radius: 50%;
-  position: relative;
-  display: inline-block;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    border: 1px solid $color-green;
-    border-radius: 50%;
-    animation: badgePulse 2s infinite ease-out;
-  }
-}
-
-@keyframes badgePulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
 
 // Headline
 .headline {
   font-family: $font-heading;
-  font-size: 6.5rem;
+  font-size: clamp(2.25rem, 11vw, 6.5rem);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.04em;
@@ -307,16 +219,16 @@ button {
   margin-bottom: 2.5rem;
 
   @media (max-width: $breakpoint-desktop) {
-    font-size: 5rem;
+    margin-bottom: 2rem;
   }
 
   @media (max-width: $breakpoint-tablet) {
-    font-size: 3.5rem;
-    line-height: 1.1;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
   }
 
   @media (max-width: $breakpoint-mobile) {
-    font-size: 2.75rem;
+    margin-bottom: 1.25rem;
   }
 }
 
@@ -335,8 +247,10 @@ button {
   @media (max-width: $breakpoint-tablet) {
     height: auto;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    width: 100%;
   }
 }
 
@@ -346,29 +260,151 @@ button {
   color: $color-fg;
   flex-shrink: 0;
   line-height: 1;
+  font-size: clamp(2.5rem, 12vw, 6.5rem);
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+    text-align: center;
+  }
 }
 
-// Infinite Vertical Marquee inside Headline
+// Marquee inside headline (animated desktop, snap-scroll on mobile)
 .inlineMarquee {
   flex: 1;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 160px;
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  min-width: 0;
+  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
 
   @media (max-width: $breakpoint-tablet) {
+    flex: none;
     width: 100%;
-    height: 160px;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 }
 
-.marqueeTrack {
+.marqueeTrack--desktop {
   display: flex;
   flex-direction: column;
   animation: scrollMarqueeVertical 25s linear infinite;
   height: max-content;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.heroCardsScroll {
+  display: none;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.35rem 0 0.85rem;
+    margin: 0 -1rem;
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+}
+
+.heroCardsTrack {
+  display: none;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: flex;
+    align-items: stretch;
+    gap: 0.85rem;
+    width: max-content;
+    padding: 0 1rem;
+    animation: scrollMarqueeHorizontal 36s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.heroCardsScroll:hover .heroCardsTrack,
+.heroCardsScroll:focus-within .heroCardsTrack {
+  @media (max-width: $breakpoint-tablet) {
+    animation-play-state: paused;
+  }
+}
+
+.heroCardSlide {
+  display: none;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    flex: 0 0 min(72vw, 240px);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    flex: 0 0 min(76vw, 220px);
+  }
+
+  .calCard,
+  .mcCard {
+    width: 100%;
+    min-width: 0;
+    height: 145px;
+    min-height: 145px;
+    max-height: 145px;
+    padding: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  .calCard .calBody,
+  .mcCard .mcBody,
+  .mcCard .mcBoardBody,
+  .mcCard .mcProgressBody {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .mcCard .mcBody {
+    justify-content: flex-start;
+  }
+}
+
+.heroCardLabel {
+  display: none;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: block;
+    font-family: $font-heading;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #d4d4d4;
+    letter-spacing: -0.02em;
+    text-align: center;
+    line-height: 1.1;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #e8e8e8;
+    white-space: nowrap;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.15rem;
+  }
 }
 
 .marqueeItem {
@@ -398,7 +434,22 @@ button {
   }
 
   @media (max-width: $breakpoint-tablet) {
-    font-size: 3.5rem;
+    font-size: 1.5rem;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    display: none;
+  }
+}
+
+.homeContainer {
+  .gridBg {
+    @media (max-width: $breakpoint-tablet) {
+      height: 720px;
+      background-size: 24px 24px;
+    }
   }
 }
 
@@ -411,95 +462,16 @@ button {
   }
 }
 
-.subtitle {
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: $color-fg-muted;
-  max-width: 680px;
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  letter-spacing: -0.01em;
-
-  @media (max-width: $breakpoint-tablet) {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+@keyframes scrollMarqueeHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-// CTA Group
-.ctaGroup {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 4rem;
 
-  @media (max-width: $breakpoint-mobile) {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 1rem;
-  }
-}
-
-.primaryCta {
-  background: $color-fg;
-  color: $color-bg;
-  padding: 1.1rem 2.2rem;
-  border-radius: 100px;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: $transition-smooth;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  text-align: center;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
-    background: #181818;
-  }
-}
-
-.secondaryCta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(0, 0, 0, 0.01);
-  color: $color-fg;
-  padding: 1.1rem 2.2rem;
-  border-radius: 100px;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: $transition-smooth;
-  text-align: center;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-
-    .playIcon {
-      transform: scale(1.1);
-    }
-  }
-}
-
-.playIcon {
-  width: 24px;
-  height: 24px;
-  background: rgba(0, 0, 0, 0.04);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $color-fg;
-  transition: $transition-smooth;
-
-  svg {
-    margin-left: 2px;
-  }
-}
 
 
 
@@ -806,40 +778,6 @@ button {
   justify-content: center;
 }
 
-.commandConsole {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
-  width: 100%;
-  max-width: 460px;
-  overflow: hidden;
-}
-
-.consoleHeader {
-  height: 44px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.25rem;
-  background: #fafafb;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: $color-fg-light;
-}
-
-.consoleDots {
-  display: flex;
-  gap: 4px;
-}
-
-.consoleDot {
-  width: 8px;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 50%;
-}
 
 .consoleSearchInput {
   display: flex;
@@ -1063,7 +1001,7 @@ button {
     gap: 10px;
 
     &::before {
-      content: '✓';
+      content: 'âœ“';
       color: $color-fg;
       font-weight: 700;
     }

@@ -1,4 +1,4 @@
-@use '../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .mcCard {
   width: 220px;
@@ -15,6 +15,7 @@
   user-select: none;
   flex-shrink: 0;
   text-align: left;
+  overflow: hidden;
 }
 
 .mcHeader {
@@ -35,12 +36,14 @@
   gap: 8px;
   justify-content: center;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 // Task Card styles
 .mcTaskRow {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
 }
 
@@ -65,9 +68,18 @@
   font-size: 0.65rem;
   font-weight: 500;
   color: #4b5563;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.35;
+  letter-spacing: 0;
+  word-spacing: normal;
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 0.72rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
 }
 
 // Board Card styles
@@ -75,6 +87,7 @@
   display: flex;
   gap: 8px;
   flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -98,9 +111,13 @@
   font-weight: 550;
   padding: 4px 6px;
   border-radius: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.3;
+  letter-spacing: 0;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 0.62rem;
+    white-space: normal;
+  }
   
   &.mcPurpleBg {
     background: #f3ebfc;
@@ -122,6 +139,8 @@
   align-items: flex-end;
   justify-content: space-between;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
   padding-bottom: 4px;
 }
 

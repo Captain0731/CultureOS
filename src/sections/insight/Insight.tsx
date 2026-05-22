@@ -71,45 +71,69 @@ export default function Insight() {
 
       // 2. Animate each node as the line reaches it
       const nodes = gsap.utils.toArray('.timelineNode');
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
       nodes.forEach((node: any) => {
-
-        // The text block
-        gsap.fromTo(
-          node.querySelector('.nodeText'),
-          { opacity: 0, y: 30, filter: 'blur(5px)' },
-          {
-            opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: node,
-              start: 'top 65%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-
-        // The widget block (slides in from left or right depending on alignment)
+        const nodeText = node.querySelector('.nodeText');
         const widget = node.querySelector('.nodeWidget');
         const isLeft = node.classList.contains('align-left');
 
-        gsap.fromTo(
-          widget,
-          { opacity: 0, x: isLeft ? 50 : -50, scale: 0.95 },
-          {
-            opacity: 1, x: 0, scale: 1, duration: 1, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: node,
-              start: 'top 65%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
+        const glassCard = node.querySelector('.widgetGlassCard');
+
+        if (isMobile) {
+          // Keep copy visible on mobile — reset transforms so cards don't slide over text
+          gsap.set([nodeText, widget, glassCard], {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            filter: 'none',
+            clearProps: 'transform,filter',
+          });
+        } else {
+          gsap.fromTo(
+            nodeText,
+            { opacity: 0, y: 30, filter: 'blur(5px)' },
+            {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: node,
+                start: 'top 65%',
+                toggleActions: 'play none none reverse',
+              },
+            }
+          );
+
+          const slideOffset = 50;
+          gsap.fromTo(
+            widget,
+            { opacity: 0, x: isLeft ? slideOffset : -slideOffset, scale: 0.95 },
+            {
+              opacity: 1,
+              x: 0,
+              scale: 1,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: node,
+                start: 'top 65%',
+                toggleActions: 'play none none reverse',
+              },
+            }
+          );
+        }
 
         // The central dot pulse
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: node,
-            start: 'top 50%',
-            toggleActions: 'play none none reverse',
+            start: isMobile ? 'top 88%' : 'top 50%',
+            toggleActions: isMobile ? 'play none none none' : 'play none none reverse',
+            once: isMobile,
           },
         });
 
@@ -126,17 +150,19 @@ export default function Insight() {
             .from(node.querySelector('.wBarFill'), { width: '0%', duration: 1.2, ease: 'power3.out' }, 0.8);
         }
 
-        // 3. Continuous Scrubbing Parallax for the glass cards
-        gsap.to(node.querySelector('.widgetGlassCard'), {
-          y: -120, // Moves up 120px slower than the scroll speed
-          ease: 'none',
-          scrollTrigger: {
-            trigger: node,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.5, // 1.5s smoothing on the scrub
-          },
-        });
+        // 3. Continuous Scrubbing Parallax for the glass cards (desktop only)
+        if (glassCard && window.matchMedia('(min-width: 769px)').matches) {
+          gsap.to(glassCard, {
+            y: -120,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: node,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.5,
+            },
+          });
+        }
       });
 
       // 4. Parallax Background Ambient Glow

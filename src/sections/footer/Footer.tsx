@@ -50,8 +50,7 @@ export default function Footer() {
         >
           <div className="ctaContent">
             <h2>
-              Invest in your people<br />
-              and create <span className="italicImpact">impact</span>
+              Invest in your people and create <span className="italicImpact">impact</span>
             </h2>
             <div className="ctaButtons">
               <motion.button 
@@ -189,7 +188,7 @@ export default function Footer() {
 
           <div className="bottomRight">
             <div className="newsletterBox">
-              <p>Get our newsletter, event invites, plus product<br/>insights and research.</p>
+              <p>Get our newsletter, event invites, plus product insights and research.</p>
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Subscribe</motion.button>
             </div>
             <p className="acknowledgement">

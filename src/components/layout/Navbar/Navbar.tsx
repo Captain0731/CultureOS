@@ -22,30 +22,70 @@ const scienceColumns = [
     desc: 'Pinpoint and resolve your organization\'s culture challenges with expert guidance and proven organizational strategy',
     linkText: 'Understand our approach',
     href: '#people-science',
+    icon: 'people',
   },
   {
     title: 'Research',
     desc: 'Learn industry trends and evidence-based best practices powered by the world\'s largest collection of employee insights',
     linkText: 'Explore our research',
     href: '#research',
+    icon: 'research',
   },
   {
     title: 'Benchmarks',
     desc: 'Explore how companies are creating world-class employee experiences across demographics, industries and more',
     linkText: 'See all benchmarks',
     href: '#benchmarks',
+    icon: 'benchmarks',
   },
   {
     title: 'ROI Calculator',
     desc: 'Building the business case for culture starts with quantifying its value',
     linkText: 'Try our calculator',
     href: '#roi-calculator',
+    icon: 'roi',
   },
-];
+] as const;
+
+function ScienceCardIcon({ type }: { type: string }) {
+  switch (type) {
+    case 'research':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+        </svg>
+      );
+    case 'benchmarks':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 3v18h18" />
+          <path d="M7 16l4-6 4 3 5-8" />
+        </svg>
+      );
+    case 'roi':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2" />
+          <path d="M8 6h8M8 10h8M8 14h5" />
+        </svg>
+      );
+    default:
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+        </svg>
+      );
+  }
+}
 
 export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [activeSubTab, setActiveSubTab] = useState<'engage' | null>('engage');
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -68,6 +108,22 @@ export default function Navbar() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileExpanded(null);
+  };
+
+  const toggleMobileSection = (key: string) => {
+    setMobileExpanded((prev) => (prev === key ? null : key));
+  };
 
   const navItems = [
     { label: 'Home', href: '#', dropdown: null },
@@ -163,6 +219,7 @@ export default function Navbar() {
                     >
                       <div className="dropdownInner splitLayout">
                         <div className="dropdownCategories">
+                          <p className="categoriesLabel">Engage products</p>
                           <div 
                             className={`categoryItem ${activeSubTab === 'engage' ? 'active' : ''}`}
                             onMouseEnter={() => setActiveSubTab('engage')}
@@ -183,6 +240,12 @@ export default function Navbar() {
                               <path d="M9 5l7 7-7 7" />
                             </svg>
                           </div>
+                          <a href="#platform" className="categoriesExplore">
+                            View all platform features
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
                         </div>
 
                         <div className="dropdownSubContent">
@@ -240,87 +303,65 @@ export default function Navbar() {
                       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <div className="scienceGrid">
-                        {/* Intro */}
                         <motion.div
                           className="scienceIntro"
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.2, delay: 0.03 }}
                         >
+                          <span className="scienceIntroBadge">Research & insights</span>
                           <h3 className="scienceIntroTitle">Science</h3>
                           <p className="scienceIntroDesc">
                             Unlock performance at scale with deep HR knowledge, organizational psychology, and advanced research.
                           </p>
+                          <a href="#science" className="scienceIntroLink">
+                            Explore the science hub
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
                         </motion.div>
 
-                        <div className="scienceDivider" />
+                        <div className="scienceDivider" aria-hidden />
 
-                        {/* Two stacked columns of items (left/right) */}
-                        <div className="scienceColumnsWrapper">
-                          <div className="scienceCols">
-                            <div className="scienceColItems">
-                              {scienceColumns.slice(0, Math.ceil(scienceColumns.length / 2)).map((item, idx) => (
-                                <motion.div
-                                  key={item.title}
-                                  className={`scienceItem ${idx === 0 ? 'active' : ''}`}
-                                  initial={{ opacity: 0, y: 6 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: 0.05 + idx * 0.03 }}
-                                  role="link"
-                                  tabIndex={0}
-                                  onClick={() => { window.location.href = item.href; }}
-                                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.location.href = item.href; } }}
-                                >
-                                  <div className="scienceItemMeta">
-                                    <span className="scienceIcon" aria-hidden>
-                                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M7 10h10" stroke="currentColor" strokeWidth="1.5"/></svg>
-                                    </span>
-                                    <div>
-                                      <div className="scienceItemTitle">{item.title}</div>
-                                      <p className="scienceItemDesc">{item.desc}</p>
-                                      <div className="scienceColLink">{item.linkText}</div>
-                                    </div>
-                                  </div>
-                                </motion.div>
-                              ))}
-                            </div>
-
-                            <div className="scienceColItems">
-                              {scienceColumns.slice(Math.ceil(scienceColumns.length / 2)).map((item, idx) => (
-                                <motion.div
-                                  key={item.title}
-                                  className="scienceItem"
-                                  initial={{ opacity: 0, y: 6 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: 0.05 + idx * 0.03 }}
-                                  role="link"
-                                  tabIndex={0}
-                                  onClick={() => { window.location.href = item.href; }}
-                                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.location.href = item.href; } }}
-                                >
-                                  <div className="scienceItemMeta">
-                                    <span className="scienceIcon" aria-hidden>
-                                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/><path d="M9 12h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                                    </span>
-                                    <div>
-                                      <div className="scienceItemTitle">{item.title}</div>
-                                      <p className="scienceItemDesc">{item.desc}</p>
-                                      <div className="scienceColLink">{item.linkText}</div>
-                                    </div>
-                                  </div>
-                                </motion.div>
-                              ))}
-                            </div>
-                          </div>
+                        <div className="scienceCards">
+                          {scienceColumns.map((item, idx) => (
+                            <motion.a
+                              key={item.title}
+                              href={item.href}
+                              className={`scienceItem ${idx === 0 ? 'active' : ''}`}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.04 + idx * 0.04, duration: 0.25 }}
+                            >
+                              <span className="scienceIcon" aria-hidden>
+                                <ScienceCardIcon type={item.icon} />
+                              </span>
+                              <div className="scienceItemBody">
+                                <span className="scienceItemTitle">{item.title}</span>
+                                <p className="scienceItemDesc">{item.desc}</p>
+                                <span className="scienceColLink">
+                                  {item.linkText}
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                  </svg>
+                                </span>
+                              </div>
+                            </motion.a>
+                          ))}
                         </div>
 
-                        {/* Footer CTA area */}
                         <div className="scienceFooter">
                           <div className="scienceFooterText">
                             <strong>Ready to get started?</strong>
-                            <div>Take the first step towards hassle-free culture insights today.</div>
+                            <span>Take the first step towards hassle-free culture insights today.</span>
                           </div>
-                          <a href="#get-started" className="scienceFooterCta">Get free access</a>
+                          <a href="#get-started" className="scienceFooterCta">
+                            Get free access
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
                         </div>
                       </div>
                     </motion.div>
@@ -345,7 +386,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>Book a Demo</span>
+            <span className="navbarCtaText">Book a Demo</span>
             <svg 
               width="14" height="14" viewBox="0 0 12 12" fill="none" 
               xmlns="http://www.w3.org/2000/svg"
@@ -355,7 +396,121 @@ export default function Navbar() {
             </svg>
           </motion.a>
         </motion.div>
+
+        <button
+          type="button"
+          className={`navbarMenuBtn ${mobileMenuOpen ? 'open' : ''}`}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.button
+              type="button"
+              className="navbarMobileBackdrop"
+              aria-label="Close menu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeMobileMenu}
+            />
+            <motion.div
+              className="navbarMobilePanel"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <nav className="navbarMobileNav" aria-label="Mobile navigation">
+                {navItems.map((item) => (
+                  <div key={item.label} className="navbarMobileItem">
+                    {item.dropdown ? (
+                      <>
+                        <button
+                          type="button"
+                          className={`navbarMobileLink ${mobileExpanded === item.dropdown ? 'expanded' : ''}`}
+                          onClick={() => toggleMobileSection(item.dropdown!)}
+                        >
+                          <span>{item.label}</span>
+                          <svg
+                            className="mobileChevron"
+                            width="10"
+                            height="6"
+                            viewBox="0 0 10 6"
+                            fill="none"
+                            aria-hidden
+                          >
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </button>
+                        <AnimatePresence>
+                          {mobileExpanded === item.dropdown && (
+                            <motion.div
+                              className="navbarMobileSub"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {item.dropdown === 'platform' && (
+                                <ul className="navbarMobileSubList">
+                                  {engageLinks.map((link) => (
+                                    <li key={link}>
+                                      <a
+                                        href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
+                                        onClick={closeMobileMenu}
+                                      >
+                                        {link}
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                              {item.dropdown === 'science' && (
+                                <ul className="navbarMobileSubList">
+                                  {scienceColumns.map((col) => (
+                                    <li key={col.title}>
+                                      <a href={col.href} onClick={closeMobileMenu}>
+                                        <strong>{col.title}</strong>
+                                        <span>{col.linkText}</span>
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <a href={item.href} className="navbarMobileLink" onClick={closeMobileMenu}>
+                        {item.label}
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </nav>
+
+              <div className="navbarMobileActions">
+                <a href="#login" className="navbarMobileSignIn" onClick={closeMobileMenu}>
+                  Sign In
+                </a>
+                <a href="#get-started" className="navbarMobileCta" onClick={closeMobileMenu}>
+                  Book a Demo
+                </a>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }

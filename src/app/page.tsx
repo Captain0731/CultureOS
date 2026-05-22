@@ -1,10 +1,8 @@
-import Navbar from "../components/Navbar";
-import HomeSection from "./sections/Home/Home";
+import HomeSection from "@/sections/home/Home";
 
 export default function Home() {
   return (
-    <main style={{ background: 'var(--color-bg)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Navbar />
+    <main className="min-h-screen flex flex-col bg-[var(--color-bg)]">
       <HomeSection />
     </main>
   );

@@ -24,7 +24,7 @@ const faqData = [
         'Open REST & GraphQL APIs for seamless connectivity',
         'Role-based access control with granular permission models',
       ],
-      image: '/secure-infrastructure.png',
+      image: '/images/secure-infrastructure.png',
       imageBg: 'purple',
       badge: {
         number: 'SOC 2',
@@ -43,7 +43,7 @@ const faqData = [
         '24/5 dedicated product support',
         'Support center resources and developer documentation',
       ],
-      image: '/support-person.png',
+      image: '/images/support-person.png',
       imageBg: 'orange',
       badge: {
         number: '24/5',
@@ -63,7 +63,7 @@ const faqData = [
         'GDPR, CCPA, and HIPAA compliant data handling',
         'Automated threat detection and real-time anomaly monitoring',
       ],
-      image: '/data-security.png',
+      image: '/images/data-security.png',
       imageBg: 'blue',
       badge: {
         number: 'AES',
@@ -83,7 +83,7 @@ const faqData = [
         'Curated playbooks for DEI, retention, and engagement',
         'Dedicated customer success manager for Pro plans',
       ],
-      image: '/hr-resources.png',
+      image: '/images/hr-resources.png',
       imageBg: 'green',
       badge: {
         number: '100+',
@@ -103,7 +103,7 @@ const faqData = [
         'Peer benchmarking across industries and regions',
         'Early access to beta features and product roadmap input',
       ],
-      image: '/hr-network.png',
+      image: '/images/hr-network.png',
       imageBg: 'pink',
       badge: {
         number: '50K+',
