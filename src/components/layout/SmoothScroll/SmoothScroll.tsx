@@ -14,6 +14,10 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       try {
         const reason = event?.reason;
         console.error('UNHANDLED_PROMISE_REJECTION', reason, reason && (reason.stack || null));
+
+        if (!reason || (typeof reason === 'object' && !('message' in reason) && !('stack' in reason) && !('name' in reason))) {
+          event.preventDefault();
+        }
       } catch (err) {
         console.error('UNHANDLED_PROMISE_REJECTION: failed to serialize reason', err);
       }

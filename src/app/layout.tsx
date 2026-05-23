@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
+import { Instrument_Serif, Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import "@/styles/global.scss";
 import "./globals.css";
 import SmoothScroll from "@/components/layout/SmoothScroll/SmoothScroll";
@@ -15,6 +15,13 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["italic"],
 });
 
 export const metadata: Metadata = {
@@ -40,7 +47,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakarta.variable} ${outfit.variable} h-full antialiased`}
+      className={`${plusJakarta.variable} ${outfit.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <Navbar />
